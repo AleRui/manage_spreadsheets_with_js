@@ -2,6 +2,7 @@
 
 let file = document.getElementById('document_picker');
 let spreadsheet; /**Content off spreadsheet. */
+let btn_create_file;
 
 file.addEventListener('change', (evt) => {
   let result = importFile(evt).then(spreadsheet => {

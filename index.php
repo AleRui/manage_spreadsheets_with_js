@@ -23,5 +23,6 @@
     <script src="./js/migrationTypes.js"></script>
     <script src="./js/match_data.js"></script>
     <script src="./js/import_data.js"></script>
+    <script src="./js/create_file.js"></script>
 </body>
 </html>
