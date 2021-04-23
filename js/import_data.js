@@ -6,7 +6,7 @@ let btn_create_file;
 
 file.addEventListener('change', (evt) => {
   let result = importFile(evt).then(spreadsheet => {
-    print_form(spreadsheet.headers);
+    print_form(spreadsheet);
   });
 
 });
