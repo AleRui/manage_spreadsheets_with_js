@@ -20,6 +20,8 @@
   </div>
   <!-- JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <script src="./js/customInputValues.js"></script>
     <script src="./js/create_file.js"></script>
     <script src="./js/migrationTypes.js"></script>
     <script src="./js/match_data.js"></script>

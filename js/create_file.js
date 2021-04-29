@@ -1,8 +1,17 @@
 function createSQLfile(contacto, spreadsheet, result_form_match) {
 
   let headers_SQL_line = createHeadersInSQL(contacto);
-  let rows_SQL_line = createRowsInSQL(contacto, spreadsheet, result_form_match);
+  let rows_SQL_line = createRowsInSQL(spreadsheet, result_form_match);
   console.log(rows_SQL_line);
+  /* ----------- CREATE FILE ------------- */
+  var blob = new Blob([
+    headers_SQL_line,
+    "\n",
+    rows_SQL_line
+  ], {
+    type: "text/plain;charset=utf-8"
+  });
+  saveAs(blob, "namefile.sql");
 }
 
 function createHeadersInSQL(headers) {
@@ -19,18 +28,18 @@ function createHeadersInSQL(headers) {
   return sql_header;
 }
 
-function createRowsInSQL(contacto, spreadsheet, result_form_match) {
+function createRowsInSQL(spreadsheet, result_form_match) {
   let rows = '';
 
   // Compare "contacto field" with inputs field values form.
   let divs_form = result_form_match.children;
-
-  // console.log(spreadsheet.rows);
+  
   for (const key in spreadsheet.rows) {
 
     if (Object.hasOwnProperty.call(spreadsheet.rows, key)) {
       const element = spreadsheet.rows[key];
-      // console.log(element);
+
+      rows += "(";
 
       for (let j = 0; j < divs_form.length; j++) {
         let field_value_name = divs_form[j].children[1];
@@ -38,14 +47,20 @@ function createRowsInSQL(contacto, spreadsheet, result_form_match) {
         if (!check_exists(field_value_name)) {
           continue;
         }
-        
+
+        console.log(field_value_name.value);
         let name_field_select = field_value_name.value;
-        rows += element[name_field_select] + ", "
+        let result_Modified_name_field
+          = modifyInputAccordingNameField(
+            name_field_select,
+            element[name_field_select]
+        );
+        rows += element[result_Modified_name_field] + ", "
 
       }
 
 
-      rows += "\n";
+      rows += "),\n";
     }
   }
 
