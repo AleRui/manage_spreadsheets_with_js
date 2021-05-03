@@ -1,5 +1,22 @@
 function modifyInputAccordingNameField(type, value) {
-  let valueT = value
-  console.log('Modify');
-  return valueT;
+  let modifiedValue = '';
+  
+  if (type) {
+    switch (type) {
+      case 'nombre':
+      case 'apellidos':
+        if (value) {
+          modifiedValue = "'" + value.trim().replace(/[^a-zA-Z\s]/g, '') + "'";
+        }
+        break;
+      case 'valor2':
+        break;
+      case 'valorN':
+        break;
+      default:
+        break;
+    }
+  }
+  
+  return modifiedValue;
 }

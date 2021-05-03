@@ -4,6 +4,7 @@ function createSQLfile(contacto, spreadsheet, result_form_match) {
   let rows_SQL_line = createRowsInSQL(spreadsheet, result_form_match);
   console.log(rows_SQL_line);
   /* ----------- CREATE FILE ------------- */
+  /*
   var blob = new Blob([
     headers_SQL_line,
     "\n",
@@ -12,6 +13,7 @@ function createSQLfile(contacto, spreadsheet, result_form_match) {
     type: "text/plain;charset=utf-8"
   });
   saveAs(blob, "namefile.sql");
+  */
 }
 
 function createHeadersInSQL(headers) {
@@ -32,7 +34,7 @@ function createRowsInSQL(spreadsheet, result_form_match) {
   let rows = '';
 
   // Compare "contacto field" with inputs field values form.
-  let divs_form = result_form_match.children;
+  let divs_form = result_form_match.children; // Atention! input button is a child too.
   
   for (const key in spreadsheet.rows) {
 
@@ -48,14 +50,16 @@ function createRowsInSQL(spreadsheet, result_form_match) {
           continue;
         }
 
-        console.log(field_value_name.value);
-        let name_field_select = field_value_name.value;
         let result_Modified_name_field
           = modifyInputAccordingNameField(
-            name_field_select,
-            element[name_field_select]
+            field_value_name.value,
+            element[field_value_name.value]
         );
-        rows += element[result_Modified_name_field] + ", "
+        
+        rows += (result_Modified_name_field) ? result_Modified_name_field : "''";
+        
+        endRow = (divs_form.length - 2 == j) ? "" : ", "; // -2 because divs childs get input button.
+        rows += endRow;
 
       }
 
