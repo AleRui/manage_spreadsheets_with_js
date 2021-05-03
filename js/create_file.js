@@ -4,7 +4,7 @@ function createSQLfile(contacto, spreadsheet, result_form_match) {
   let rows_SQL_line = createRowsInSQL(spreadsheet, result_form_match);
   console.log(rows_SQL_line);
   /* ----------- CREATE FILE ------------- */
-  /*
+  
   var blob = new Blob([
     headers_SQL_line,
     "\n",
@@ -13,7 +13,7 @@ function createSQLfile(contacto, spreadsheet, result_form_match) {
     type: "text/plain;charset=utf-8"
   });
   saveAs(blob, "namefile.sql");
-  */
+  
 }
 
 function createHeadersInSQL(headers) {
