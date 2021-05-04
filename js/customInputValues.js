@@ -5,15 +5,17 @@ function modifyInputAccordingNameField(type, value) {
     switch (type) {
       case 'nombre':
       case 'apellidos':
+      case 'provi':
+      case 'pobla':
         if (value) {
           modifiedValue = "'" + value.trim().replace(/[^a-zA-Z\s]/g, '') + "'";
         }
         break;
-      case 'valor2':
-        break;
-      case 'valorN':
-        break;
       default:
+        if (value && typeof(value) == "string") {
+          // console.log(value);
+          modifiedValue = "'" + value.trim() + "'";
+        }
         break;
     }
   }

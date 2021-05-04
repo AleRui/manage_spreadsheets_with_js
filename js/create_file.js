@@ -32,6 +32,9 @@ function createHeadersInSQL(headers) {
 
 function createRowsInSQL(spreadsheet, result_form_match) {
   let rows = '';
+  
+  let idEmpresa = result_form_match[1].value;
+  let idFranquicia = result_form_match[3].value;
 
   // Compare "contacto field" with inputs field values form.
   let divs_form = result_form_match.children; // Atention! input button is a child too.
@@ -41,7 +44,7 @@ function createRowsInSQL(spreadsheet, result_form_match) {
     if (Object.hasOwnProperty.call(spreadsheet.rows, key)) {
       const element = spreadsheet.rows[key];
 
-      rows += "(";
+      rows += "(" + idEmpresa + "," + idFranquicia + ",";
 
       for (let j = 0; j < divs_form.length; j++) {
         let field_value_name = divs_form[j].children[1];
