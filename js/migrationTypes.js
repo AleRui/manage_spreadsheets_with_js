@@ -3,5 +3,12 @@ const contacto = [
   'apellidos',
   'domicilio',
   'pobla',
-  'provi'
+  'provi',
+  // Necessary
+  'codigo',
+  'tipo',
+  'estado',
+  'iconos_publi',
+  'iconos_lopd',
+  'num'
 ];

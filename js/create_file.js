@@ -1,7 +1,11 @@
-function createSQLfile(contacto, spreadsheet, result_form_match) {
+function createSQLfile(contacto, spreadsheet, result_form_basic_info, result_form_match) {
 
   let headers_SQL_line = createHeadersInSQL(contacto);
-  let rows_SQL_line = createRowsInSQL(spreadsheet, result_form_match);
+  let rows_SQL_line = createRowsInSQL(
+    spreadsheet,
+    result_form_basic_info,
+    result_form_match
+    );
   console.log(rows_SQL_line);
   /* ----------- CREATE FILE ------------- */
   
@@ -18,7 +22,7 @@ function createSQLfile(contacto, spreadsheet, result_form_match) {
 
 function createHeadersInSQL(headers) {
   /** TODO: Can choose table name. */
-  let fields = '';
+  let fields = 'idEmpresa, idFranquicia, idImport, ';
   for (let i = 0; i < headers.length; i++) {
     if (i + 1 == headers.length) {
       fields += headers[i];
@@ -30,21 +34,23 @@ function createHeadersInSQL(headers) {
   return sql_header;
 }
 
-function createRowsInSQL(spreadsheet, result_form_match) {
+function createRowsInSQL(spreadsheet, result_form_basic_info, result_form_match) {
   let rows = '';
   
-  let idEmpresa = result_form_match[1].value;
-  let idFranquicia = result_form_match[3].value;
+  let idEmpresa = result_form_basic_info[1].value;
+  let idFranquicia = result_form_basic_info[3].value;
+
 
   // Compare "contacto field" with inputs field values form.
   let divs_form = result_form_match.children; // Atention! input button is a child too.
   
+  let counterIdImport = 1;
   for (const key in spreadsheet.rows) {
 
     if (Object.hasOwnProperty.call(spreadsheet.rows, key)) {
       const element = spreadsheet.rows[key];
 
-      rows += "(" + idEmpresa + "," + idFranquicia + ",";
+      rows += "(" + idEmpresa + ", " + idFranquicia + ", " + counterIdImport + ", ";
 
       for (let j = 0; j < divs_form.length; j++) {
         let field_value_name = divs_form[j].children[1];
@@ -69,6 +75,9 @@ function createRowsInSQL(spreadsheet, result_form_match) {
 
       rows += "),\n";
     }
+
+    counterIdImport++;
+
   }
 
 

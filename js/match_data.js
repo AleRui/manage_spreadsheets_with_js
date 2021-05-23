@@ -6,6 +6,8 @@ function print_form(spreadsheet) {
 
   let form_match = document.createElement("form");
   form_match.id = 'form_match';
+  let form_basic_info = document.createElement("form");
+  form_basic_info.id = 'form_basic_info';
 
   /* idEmpresa */
   let container_input_idEmpresa = document.createElement("div");
@@ -22,7 +24,7 @@ function print_form(spreadsheet) {
   input_idEmpresa.id = 'idEmpresa-value';
   container_input_idEmpresa.appendChild(input_idEmpresa);
 
-  form_match.appendChild(container_input_idEmpresa);
+  form_basic_info.appendChild(container_input_idEmpresa);
 
   /* idFranquicia */
   let container_input_idFranquicia = document.createElement("div");
@@ -39,7 +41,7 @@ function print_form(spreadsheet) {
   input_idFranquicia.id = 'idFranquicia-value';
   container_input_idFranquicia.appendChild(input_idFranquicia);
 
-  form_match.appendChild(container_input_idFranquicia);
+  form_basic_info.appendChild(container_input_idFranquicia);
 
   let form_match_container = document.getElementById('form_match_fields');
   let select_spreadsheet_headers = document.createElement("select");
@@ -83,12 +85,15 @@ function print_form(spreadsheet) {
   btn_create_file.value = 'Create file SQL';
   form_match.appendChild(btn_create_file);
 
+  // Insert Forms in DOM HTML.
+  form_match_container.appendChild(form_basic_info);
   form_match_container.appendChild(form_match);
 
   //if (btn_create_file && createSQLfile && typeof createSQLfile == "function") {
     btn_create_file.addEventListener('click', (spreadsheat) => {
+      let result_form_basic_info = document.getElementById("form_basic_info");
       let result_form_match = document.getElementById("form_match");
-      createSQLfile(contacto, spreadsheet, result_form_match);
+      createSQLfile(contacto, spreadsheet, result_form_basic_info, result_form_match);
     });
   //}
 }

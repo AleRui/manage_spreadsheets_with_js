@@ -1,0 +1,8 @@
+#form_input_basic_info {
+  border: 14px solid gray;
+}
+
+select[id*=select-] {
+  border: 2px solid pink;
+  max-width: 300px;
+}

@@ -13,7 +13,6 @@ function modifyInputAccordingNameField(type, value) {
         break;
       default:
         if (value && typeof(value) == "string") {
-          // console.log(value);
           modifiedValue = "'" + value.trim() + "'";
         }
         break;
